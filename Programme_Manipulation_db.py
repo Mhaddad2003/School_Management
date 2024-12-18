@@ -3,7 +3,7 @@ import sqlite3
 # Connexion à la base de données
 
 def connect_db():
-    return sqlite3.connect("C:/Users/hp/Desktop/Data/Gestion_Scolarite (1).db")
+    return sqlite3.connect("Gestion_Scolarite.db")
     
 # Fonctions pour l'étudiant 
 
@@ -79,7 +79,7 @@ def lister_etudiant():
     
     if etudiants:
         print("La liste des étudiants :")
-        print(f"{'Numéro d\'apogée':<19} {'Nom':<20} {'Prénom':<20} {'CIN':<20} {'Date de naissance':<15}")
+        print(f"{'Numéro dapogée':<19} {'Nom':<20} {'Prénom':<20} {'CIN':<20} {'Date de naissance':<15}")
         print("-" * 100)  
         
         for etudiant in etudiants:
@@ -87,6 +87,49 @@ def lister_etudiant():
     else:
         print("Aucun étudiant trouvé dans la base de données!")
 
+def inscrit_etudiant():
+    conn = connect_db()
+    curs = conn.cursor()
+
+    module_id = input("Entrez l'id du module : ")
+    etu_apo = input("Entrez l'apogee d'etudiant : ")
+    if module_existe(module_id) and etudiant_existe(etu_apo):
+        note = input("Entrez la note du etudiant : ")
+        valide = input("validation (V: valide/NV:non valide/AS:compose): ")
+        curs.execute("INSERT INTO Inscrire VALUES (?, ?, ?, ?)", (module_id, etu_apo, note, valide))
+        conn.commit()
+    else:
+        print("le numero d'apogee ou l'id de module est incorrect")
+    conn.close()
+
+def update_note():
+    conn = connect_db()
+    curs = conn.cursor()
+    module_id = input("Entrez l'id du module : ")
+    etu_apo = input("Entrez l'apogee d'etudiant : ")
+    curs.execute("SELECT * FROM Inscrire WHERE module_id = ? and etudiant_apogee = ?", (module_id, etu_apo))
+    result = curs.fetchone()
+
+    if result:
+        note = input("Entrez la note d'etudiant : ")
+        curs.execute("UPDATE Inscrire SET note = ?"
+                     "WHERE module_id = ? and etudiant_apogee = ?", (note, module_id, etu_apo)
+                     )
+        conn.commit()
+        if (int(note) < 10):
+            curs.execute("UPDATE Inscrire SET valide = 'NV'"
+                         "WHERE module_id = ? and etudiant_apogee = ?", (module_id, etu_apo)
+                         )
+            conn.commit()
+        else:
+            curs.execute("UPDATE Inscrire SET valide = 'V'"
+                         "WHERE module_id = ? and etudiant_apogee = ?", (module_id, etu_apo)
+                         )
+            conn.commit()
+
+    else:
+        print("le numero d'apogee ou l'id de module est incorrect")
+    conn.close()
     
 class Switch:
     value = None
@@ -293,6 +336,8 @@ def menuEtd():
         print("2: Modifier un étudiant")
         print("3: Supprimer un étudiant")
         print("4: Lister l'ensemble des étudiants")
+        print("5: inscrit l'etudiant dans un model")
+        print("6: Modifier la note de l'etudiant")
         print("0: Quitter")
         choix = input("Entrer votre choix: ")
 
@@ -310,6 +355,12 @@ def menuEtd():
         elif case("4"):
             print("Choix 4: Lister les étudiants")
             lister_etudiant()
+        elif case("5"):
+            print("Choix 5: inscrit l'etudiant dans un model")
+            inscrit_etudiant()
+        elif case("6"):
+            print("Choix 6: Modifier la note de l'etudiant")
+            update_note()
         elif case("0"):
             print("Au revoir!")
             break 
