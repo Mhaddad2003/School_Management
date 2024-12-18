@@ -18,7 +18,60 @@ def exist_enseignant(id):
     conn.close()
     return res is not None
 
-def gestion_enseignant():
+def ajouter_enseignant():
+    conn = connect_db()
+    curs = conn.cursor()
+    nom = input("Entrez le nom de l'enseignant: ")
+    prenom = input("Entrez le prénom de l'enseignant: ")
+    cin = input("Entrez le cin de l'enseignant: ")
+    dept = input("Entrez le departement de l'enseignant: ")
+
+    curs.execute("INSERT INTO Enseignant (nom, prenom, cin, departement) "
+                 "VALUES (?, ?, ?, ?)", (nom, prenom, cin, dept))
+    conn.commit()
+    conn.close()
+
+def delete_enseignant():
+    conn = connect_db()
+    curs = conn.cursor()
+    ens_id = input("Entrez l'id de l'enseignant: ")
+    if exist_enseignant(ens_id):
+        curs.execute("DELETE FROM Enseignant WHERE id = ?", ens_id)
+    else:
+        print("Enseignant n'existe pas")
+    conn.commit()
+    conn.close()
+
+def lister_enseignant():
+    conn = connect_db()
+    curs = conn.cursor()
+    curs.execute("SELECT * FROM Enseignant")
+    results = curs.fetchall()
+    print("_" * 70)
+    print("|    ID    |    Nom    |    Prenom    |    CIN    |    Departement    |")
+    print("_" * 70)
+    for res in results:
+        print(f"|    {res[0]}    |  {res[1]}   |   {res[2]}    |   {res[3]}    |   {res[4]}   |")
+        print("_" * 70)
+    conn.commit()
+    conn.close()
+
+def update_enseignant():
+    conn = connect_db()
+    curs = conn.cursor()
+    ens_id = input("Entrez l'id de l'enseignant: ")
+    if exist_enseignant(ens_id):
+        curs.execute("UPDATE Enseignant SET departement = ?"
+                     "WHERE id = ?",
+                     (input("Entrez le nouveau departement de l'enseignant: "), ens_id)
+                     )
+        conn.commit()
+    else:
+        print("Enseignant n'existe pas")
+    conn.close()
+
+
+def menu_enseignant():
     while True:
         print("Liste des choix".center(10, "#"))
         print("1: Ajouter un nouveau enseignant")
@@ -28,57 +81,24 @@ def gestion_enseignant():
         print("0: Quitter")
         c1 = input("Entrer votre choix: ")
         while switch(c1):
-            conn = connect_db()
-            curs = conn.cursor()
             if case("0"):
                 print("Au revoir")
                 break
-            if case("1"):
-                nom = input("Entrez le nom de l'enseignant: ")
-                prenom = input("Entrez le prénom de l'enseignant: ")
-                cin = input("Entrez le cin de l'enseignant: ")
-                dept = input("Entrez le departement de l'enseignant: ")
-
-                curs.execute("INSERT INTO Enseignant (nom, prenom, cin, departement) "
-                             "VALUES (?, ?, ?, ?)",(nom, prenom, cin, dept))
-                conn.commit()
+            elif case("1"):
+                ajouter_enseignant()
                 break
-            if case("2"):
-                ens_id = input("Entrez l'id de l'enseignant: ")
-                if exist_enseignant(ens_id):
-                    curs.execute("DELETE FROM Enseignant WHERE id = ?", ens_id)
-                else:
-                    print("Enseignant n'existe pas")
-                conn.commit()
+            elif case("2"):
+                delete_enseignant()
                 break
-            if case("3"):
-                curs.execute("SELECT * FROM Enseignant")
-                results = curs.fetchall()
-                print("_" * 70)
-                print("|    ID    |    Nom    |    Prenom    |    CIN    |    Departement    |")
-                print("_" * 70)
-                for res in results:
-                    print(f"|    {res[0]}    |  {res[1]}   |   {res[2]}    |   {res[3]}    |   {res[4]}   |")
-                    print("_" * 70)
-                conn.commit()
+            elif case("3"):
+                lister_enseignant()
                 break
-            if case("4"):
-                ens_id = input("Entrez l'id de l'enseignant: ")
-                if exist_enseignant(ens_id):
-                    curs.execute("UPDATE Enseignant SET departement = ?"
-                                 "WHERE id = ?",
-                                 (input("Entrez le nouveau departement de l'enseignant: "), ens_id)
-                                 )
-                    conn.commit()
-                else:
-                    print("Enseignant n'existe pas")
-
+            elif case("4"):
+                update_enseignant()
                 break
             else:
                 print("Invalide choix")
                 break
-
-            conn.close()
         if c1 == "0":
             break
 
@@ -92,7 +112,7 @@ while True:
 
     while switch(choix):
         if case("1"):
-            gestion_enseignant()
+            menu_enseignant()
             break
         if case("2"):
             print("choix 2")
