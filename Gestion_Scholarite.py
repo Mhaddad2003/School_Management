@@ -10,6 +10,13 @@ def case(*args):
 def connect_db():
     return sqlite3.connect("Gestion_Scolarite.db")
 
+def exist_enseignant(id):
+    conn = connect_db()
+    curs = conn.cursor()
+    curs.execute("SELECT * FROM Enseignant WHERE id=?", (id))
+    res = curs.fetchone()
+    conn.close()
+    return res is not None
 
 def gestion_enseignant():
     while True:
@@ -37,8 +44,11 @@ def gestion_enseignant():
                 conn.commit()
                 break
             if case("2"):
-                curs.execute("DELETE FROM Enseignant "
-                             "WHERE id = ?", input("Enseignant id : "))
+                ens_id = input("Entrez l'id de l'enseignant: ")
+                if exist_enseignant(ens_id):
+                    curs.execute("DELETE FROM Enseignant WHERE id = ?", ens_id)
+                else:
+                    print("Enseignant n'existe pas")
                 conn.commit()
                 break
             if case("3"):
@@ -53,11 +63,16 @@ def gestion_enseignant():
                 conn.commit()
                 break
             if case("4"):
-                curs.execute("UPDATE Enseignant SET departement = ?"
-                             "WHERE id = ?",
-                             (input("Entrez le nouveau departement de l'enseignant: "),
-                             input("Entrez l'id de l'enseignant: ")))
-                conn.commit()
+                ens_id = input("Entrez l'id de l'enseignant: ")
+                if exist_enseignant(ens_id):
+                    curs.execute("UPDATE Enseignant SET departement = ?"
+                                 "WHERE id = ?",
+                                 (input("Entrez le nouveau departement de l'enseignant: "), ens_id)
+                                 )
+                    conn.commit()
+                else:
+                    print("Enseignant n'existe pas")
+
                 break
             else:
                 print("Invalide choix")
