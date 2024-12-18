@@ -1,0 +1,10 @@
+101,Al Arabi,Mohamed,AB123456,Informatique
+102,Al Hachimi,Ahmed,CD654321,Mathématiques
+103,Ben Omar,Fatma,EF789123,Physique
+104,El Hassani,Youssef,GH321789,Chimie
+105,Chérif,Khadija,IJ456789,Sciences de la Vie
+106,El Attar,Ali,KL987654,Ingénierie
+107,El Sabri,Noura,MN123987,Informatique
+108,El Kurdi,Amir,OP654987,Electronique
+109,El Mansour,Zina,QR789654,Sciences Sociales
+110,El Maghrebi,Iyad,ST987321,Economie
