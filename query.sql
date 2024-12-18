@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS Enseignant (
     nom TEXT NOT NULL,
     prenom TEXT NOT NULL,
     cin TEXT NOT NULL,
-    departemet TEXT NOT NULL,
+    departement TEXT NOT NULL,
 );
 
 CREATE TABLE IF NOT EXISTS Module (
@@ -30,6 +30,6 @@ CREATE TABLE IF NOT EXISTS Inscrire (
     note REAL NOT NULL,
     valide TEXT NOT NULL
     PRIMARY KEY (module_id, etudiant_apogee),
-    FOREIGN KEY (module_id) REFERENCES Module(id),
-    FOREIGN KEY (Etudiant_apogee) REFERENCES Etudiant(num_apogee)
+    FOREIGN KEY (module_id) REFERENCES Module(id) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (Etudiant_apogee) REFERENCES Etudiant(num_apogee) ON UPDATE CASCADE ON DELETE CASCADE
 );
