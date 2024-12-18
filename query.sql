@@ -1,5 +1,5 @@
--- Créer la base de données
-CREATE DATABASE IF NOT EXISTS Gestion_Scolarite;
+-- Activer les clés étrangères
+PRAGMA foreign_keys = ON;
 
 -- Créer les tables dans SQLite
 
@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS Module (
     Enseignant_id INTEGER NOT NULL,
     matiere TEXT NOT NULL,
     semestre TEXT NOT NULL,
-    FOREIGN KEY (Enseignant_id) REFERENCES Enseignant(id)
+    FOREIGN KEY (Enseignant_id) REFERENCES Enseignant(id) ON UPDATE CASCADE ON DELETE SET NULL
 );
 
 -- Table Inscrire
@@ -37,6 +37,6 @@ CREATE TABLE IF NOT EXISTS Inscrire (
     note REAL,
     valide TEXT,
     PRIMARY KEY (module_id, etudiant_apogee),
-    FOREIGN KEY (module_id) REFERENCES Module(id),
-    FOREIGN KEY (etudiant_apogee) REFERENCES Etudiant(num_apogee)
+    FOREIGN KEY (module_id) REFERENCES Module(id) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (etudiant_apogee) REFERENCES Etudiant(num_apogee) ON UPDATE CASCADE ON DELETE CASCADE
 );
