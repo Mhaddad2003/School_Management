@@ -28,11 +28,12 @@ while True:
         if case("3"):
             print("choix 3")
             break
-        elif switch.case("0"):
-            print("Au revoir!")
-            break
-    else:
-        print("Choix invalide, veuillez réessayer!")
+        else:
+           print("invalid choix")
+           break
+
+    if choix == "0":
+        break
 
 
 
