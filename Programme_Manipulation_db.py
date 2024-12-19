@@ -130,7 +130,25 @@ def update_note():
     else:
         print("le numero d'apogee ou l'id de module est incorrect")
     conn.close()
-    
+
+def sup_inscrit():
+    conn = connect_db()
+    curs = conn.cursor()
+    module_id = input("Entrez l'id du module : ")
+    etu_apo = input("Entrez l'apogee d'etudiant : ")
+    curs.execute("SELECT * FROM Inscrire WHERE module_id = ? and etudiant_apogee = ?", (module_id, etu_apo))
+    result = curs.fetchone()
+    if result:
+        curs.execute(
+            "DELETE FROM Inscrire WHERE module_id = ? AND etudiant_apogee = ?",
+            (module_id, etu_apo)
+        )
+        conn.commit()
+        print("la suppression se fait avec succes")
+    else:
+        print("le numero d'apogee ou l'id de module est incorrect")
+    conn.close()
+
 class Switch:
     value = None
     def __new__(class_, value):
@@ -338,6 +356,7 @@ def menuEtd():
         print("4: Lister l'ensemble des étudiants")
         print("5: inscrit l'etudiant dans un model")
         print("6: Modifier la note de l'etudiant")
+        print("7: Delete une inscription")
         print("0: Quitter")
         choix = input("Entrer votre choix: ")
 
@@ -361,6 +380,9 @@ def menuEtd():
         elif case("6"):
             print("Choix 6: Modifier la note de l'etudiant")
             update_note()
+        elif case("7"):
+            print("Choix 7: Delete un inscription")
+            sup_inscrit()
         elif case("0"):
             print("Au revoir!")
             break 
