@@ -1,31 +1,31 @@
-ID_Module,Nom_Module,Semester,ID_Enseignant
-1,Programmation,1,101
-2,Analyse Mathématique,1,102
-3,Mécanique,1,103
-4,Chimie Organique,1,104
-5,Biologie Cellulaire,1,105
-6,Statistiques,1,106
-7,Algèbre Linéaire,2,102
-8,Intelligence Artificielle,2,101
-9,Base de Données,2,107
-10,Physique Quantique,2,103
-11,Analyse Numérique,2,106
-12,Architecture des Ordinateurs,3,101
-13,Réseaux Informatiques,3,107
-14,Systèmes Embarqués,3,108
-15,Électronique Analogique,3,109
-16,Économie Appliquée,3,110
-17,Management,3,111
-18,Génie Logiciel,4,101
-19,Calcul Différentiel,4,106
-20,Théorie des Graphes,4,102
-21,Microbiologie,4,105
-22,Chimie Physique,4,104
-23,Électromagnétisme,4,103
-24,Analyse Fonctionnelle,5,102
-25,Programmation Web,5,107
-26,Optimisation Mathématique,5,106
-27,Cloud Computing,5,108
-28,Cybersécurité,5,109
-29,Vision par Ordinateur,6,101
-30,Analyse Financière,6,110
+ID_Module,Nom_Module,Semester
+1,Programmation,1
+2,Analyse Mathématique,1
+3,Mécanique,1
+4,Chimie Organique,1
+5,Biologie Cellulaire,1
+6,Statistiques,1
+7,Algèbre Linéaire,2
+8,Intelligence Artificielle,2
+9,Base de Données,2
+10,Physique Quantique,2
+11,Analyse Numérique,2
+12,Architecture des Ordinateurs,3
+13,Réseaux Informatiques,3
+14,Systèmes Embarqués,3
+15,Électronique Analogique,3
+16,Économie Appliquée,3
+17,Management,3
+18,Génie Logiciel,4
+19,Calcul Différentiel,4
+20,Théorie des Graphes,4
+21,Microbiologie,4
+22,Chimie Physique,4
+23,Électromagnétisme,4
+24,Analyse Fonctionnelle,5
+25,Programmation Web,5
+26,Optimisation Mathématique,5
+27,Cloud Computing,5
+28,Cybersécurité,5
+29,Vision par Ordinateur,6
+30,Analyse Financière,6
