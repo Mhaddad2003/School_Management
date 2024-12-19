@@ -1,9 +1,8 @@
 import os
 
-FILE_PATH1 = "C:/Users/HP/Downloads/Master 2I/s1/Interaction Humain Technologies/IHM projets/projet1/data/Etudiant.txt"
-FILE_PATH2 = "C:/Users/HP/Downloads/Master 2I/s1/Interaction Humain Technologies/IHM projets/projet1/data/Enseignant.txt"
-FILE_PATH3 = "C:/Users/HP/Downloads/Master 2I/s1/Interaction Humain Technologies/IHM projets/projet1/data/Module.txt"
-
+FILE_PATH1 = "./data/Etudiant.txt"
+FILE_PATH2 = "./data/Enseignant.txt"
+FILE_PATH3 = "./data/Module.txt"
 
 # Fonctions pour l'étudiant 
 
