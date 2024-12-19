@@ -41,5 +41,3 @@ curs.execute('''CREATE TABLE IF NOT EXISTS Inscrire (
                 FOREIGN KEY (etudiant_apogee) REFERENCES Etudiant(num_apogee) ON UPDATE CASCADE ON DELETE CASCADE
             )''')
 result = curs.fetchone()
-
-print(result)
