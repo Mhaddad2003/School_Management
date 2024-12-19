@@ -149,6 +149,24 @@ def sup_inscrit():
         print("le numero d'apogee ou l'id de module est incorrect")
     conn.close()
 
+def lister_inscription():
+    conn = connect_db()
+    curs = conn.cursor()
+    print("La liste des Incription aux modules :")
+
+    curs.execute("SELECT * FROM Inscrire")
+    data = curs.fetchall()
+
+    if data:
+        print("="*75)
+        print(f'{"Module ID":<10} {"Numero dapogee":<25} {"Note":<20} {"Validation":<20}')
+        print("=" * 75)
+
+        for line in data:
+            print(f"{line[0]:<19} {line[1]:<20} {line[2]:<20} {line[3]:<20}")
+            print("_"*75)
+    else:
+        print("Aucun inscription au module trouvé dans la base de données!")
 class Switch:
     value = None
     def __new__(class_, value):
@@ -357,6 +375,7 @@ def menuEtd():
         print("5: inscrit l'etudiant dans un model")
         print("6: Modifier la note de l'etudiant")
         print("7: Delete une inscription")
+        print("8: liste des inscriptions")
         print("0: Quitter")
         choix = input("Entrer votre choix: ")
 
@@ -383,6 +402,9 @@ def menuEtd():
         elif case("7"):
             print("Choix 7: Delete un inscription")
             sup_inscrit()
+        elif case("8"):
+            print("Choix 8: liste des inscription")
+            lister_inscription()
         elif case("0"):
             print("Au revoir!")
             break 
