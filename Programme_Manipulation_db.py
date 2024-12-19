@@ -304,29 +304,6 @@ def module_existe(id):
     
     return result is not None
 
-def supprimer_module():
-    conn = connect_db()
-    curs = conn.cursor()
-    
-    id = int(input("Entrez l'ID du Module à supprimer : "))
-    
-    if module_existe(id):
-        try:
-
-            curs.execute("DELETE FROM Module WHERE id = ?", (id,))
-            conn.commit()
-            
-            if curs.rowcount > 0:
-                print(f"Le module avec l'ID {id} a été supprimé avec succès!")
-            else:
-                print(f"Aucun module trouvé avec l'ID {id}!")
-        except sqlite3.Error as e:
-            print(f"Erreur lors de la suppression du module : {e}")
-        finally:
-            conn.close()
-    else:
-        print("Le module n'existe pas!")
-
 def modifier_module():
     conn = connect_db()
     curs = conn.cursor()
@@ -350,6 +327,29 @@ def modifier_module():
             conn.close()
     else:
         print("Le module n'existe pas!")   
+
+def supprimer_module():
+    conn = connect_db()
+    curs = conn.cursor()
+    
+    id = int(input("Entrez l'ID du Module à supprimer : "))
+    
+    if module_existe(id):
+        try:
+
+            curs.execute("DELETE FROM Module WHERE id = ?", (id,))
+            conn.commit()
+            
+            if curs.rowcount > 0:
+                print(f"Le module avec l'ID {id} a été supprimé avec succès!")
+            else:
+                print(f"Aucun module trouvé avec l'ID {id}!")
+        except sqlite3.Error as e:
+            print(f"Erreur lors de la suppression du module : {e}")
+        finally:
+            conn.close()
+    else:
+        print("Le module n'existe pas!")
         
 def lister_module():
     conn = connect_db()
