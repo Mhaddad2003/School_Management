@@ -3,7 +3,7 @@ import sqlite3
 # Connexion à la base de données
 
 def connect_db():
-    return sqlite3.connect("Gestion_Scolarite.db")
+    return sqlite3.connect("./data/Gestion_Scolarite.db")
     
 # Fonctions pour l'étudiant 
 
