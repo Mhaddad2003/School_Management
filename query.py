@@ -1,6 +1,6 @@
 import sqlite3
 
-conn = sqlite3.connect("C:/Users/hp/Downloads/Gestion_Scolarite.db")
+conn = sqlite3.connect("./data/Gestion_Scolarite.db")
 curs = conn.cursor()
 curs.execute("PRAGMA foreign_keys = ON;")
 
