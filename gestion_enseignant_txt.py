@@ -27,14 +27,15 @@ def lister_enseignant():
     with open("data/Enseignant.txt", "r", encoding="utf-8") as f:
         lines = f.readlines()
 
-        print("_" * 70)
-        print("|    ID    |    Nom    |    Prenom    |    CIN    |    Departement    |")
-        print("_" * 70)
+        print("=" * 90)
+        print(f"{'ID':<5} {'Nom':<20} {'Prenom':<20} {'CIN':<20} {'Departement':<20}")
+        print("=" * 90)
+
         for line in lines:
             line = line.strip()
             line = line.split(',')
-            print(f"|    {line[0]}    |  {line[1]}   |   {line[2]}    |   {line[3]}    |   {line[4]}   |")
-            print("_" * 70)
+            print(f"{line[0]:<5} {line[1]:<20} {line[2]:<20} {line[3]:<20} {line[4]:<20}")
+            print("_" * 90)
 
 
 
@@ -51,11 +52,11 @@ def menu_enseignant():
             if case("0"):
                 print("Au revoir")
                 break
-            elif case("2"):
-                lister_enseignant()
-                break
             elif case("1"):
                 ajouter_enseignant()
+                break
+            elif case("2"):
+                lister_enseignant()
                 break
             else:
                 print("Invalide choix")
