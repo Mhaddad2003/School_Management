@@ -90,7 +90,7 @@ def lister_etudiant():
     else:
         print("Aucun étudiant trouvé dans la base de données!")
 
-# Pour la table inscrit
+# Pour la table Inscrire
 
 def inscrire_etudiant():
     conn = connect_db()
