@@ -259,17 +259,6 @@ def lister_enseignant():
 
 # Fonctions pour le module 
 
-def module_existe(id):
-    conn = connect_db()
-    curs = conn.cursor()
-    
-    curs.execute("SELECT * FROM Module WHERE id = ?", (id,))
-    result = curs.fetchone()
-    
-    conn.close()
-    
-    return result is not None
-
 def ajouter_module():
     conn = connect_db()
     curs = conn.cursor()
@@ -296,13 +285,24 @@ def ajouter_module():
             conn.commit()
             print("Module ajouté avec succès!")
         else:
-            print("Le module avec cet ID n'existe pas!")
+            print("L'enseignant avec cet ID n'existe pas!")
     except ValueError:
         print("Veuillez entrer un ID valide pour le module!")
     except sqlite3.Error as e:
         print(f"Erreur lors de l'ajout du module : {e}")
     finally:
         conn.close()  
+
+def module_existe(id):
+    conn = connect_db()
+    curs = conn.cursor()
+    
+    curs.execute("SELECT * FROM Module WHERE id = ?", (id,))
+    result = curs.fetchone()
+    
+    conn.close()
+    
+    return result is not None
 
 def supprimer_module():
     conn = connect_db()
